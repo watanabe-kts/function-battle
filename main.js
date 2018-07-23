@@ -21,7 +21,7 @@ let funcs = [
 ]
 
 let funcsOnlyG = [
-  { f: f.f, text: 'f(x)' },
+  { f: x => f.f(x), text: 'f(x)' },
   { f: x => f.f(f.f(x)), text: 'f(f(x))' }
 ]
 
