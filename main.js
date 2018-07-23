@@ -1,18 +1,34 @@
-let funcs = [
-  { id: 1, f: x => x + 1, text: 'x + 1' },
-  { id: 2, f: x => 2 * x, text: '2x' },
-  { id: 3, f: x => 3 * x, text: '3x' },
-  { id: 4, f: x => x * x, text: 'x^2' },
-  { id: 5, f: x => x - 1, text: 'x - 1'},
-  { id: 6, f: x => x + 2, text: 'x + 2' },
-  { id: 7, f: x => x +10, text: 'x + 10' },
-  { id: 8, f: x => 5 * x, text: '5x'},
-]
+const randomInt = max => Math.floor(Math.random() * max)
 
-let f
+let f = { f: x => x }
 let fChoices
 let g
 let gChoices
+
+let funcs = [
+  { f: x => x + 1, text: 'x + 1' },
+  { f: x => 2 * x, text: '2x' },
+  { f: x => 3 * x, text: '3x' },
+  { f: x => x * x, text: 'x^2' },
+  { f: x => x - 1, text: 'x - 1'},
+  { f: x => x + 2, text: 'x + 2' },
+  { f: x => x +10, text: 'x + 10' },
+  { f: x => 5 * x, text: '5x'},
+  { f: x => Math.abs(x), text: '|x|'},
+  { f: x => x*x*x, text: 'x^3'},
+  { f: x => randomInt(x),  text: 'random(0, x]' },
+]
+
+let funcsOnlyG = [
+  { f: f.f, text: 'f(x)' },
+  { f: x => f.f(f.f(x)), text: 'f(f(x))' }
+]
+
+let nextId = 1
+for (f of funcs.concat(funcsOnlyG)) {
+  f.id = nextId
+  nextId++
+}
 
 function shuffled(array) {
   let a = array.concat()
@@ -24,8 +40,6 @@ function shuffled(array) {
   }
   return a
 }
-
-const randomInt = max => Math.floor(Math.random() * 4)
 
 const answerButtons = {}
 for (let s of ['f', 'g']) {
@@ -41,10 +55,11 @@ for (let s of ['f', 'g']) {
 }
 
 function nextQuestion() {
-  const funcsTmp = shuffled(funcs)
-  fChoices = funcsTmp.slice(0, 4)
+  const funcsF = shuffled(funcs)
+  fChoices = funcsF.slice(0, 4)
   f = fChoices[randomInt(4)]
-  gChoices = funcsTmp.slice(4, 8)
+  const funcsG = shuffled(funcsF.slice(4).concat(funcsOnlyG))
+  gChoices = funcsG.slice(4, 8)
   g = gChoices[randomInt(4)]
 
   for (let i = 0; i < 4; ++i) {
