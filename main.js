@@ -14,6 +14,7 @@ let funcs = [
   { f: x => x + 2, text: 'x + 2' },
   { f: x => x +10, text: 'x + 10' },
   { f: x => 5 * x, text: '5x'},
+  { f: x => 10* x, text: '10x'},
   { f: x => Math.abs(x), text: '|x|'},
   { f: x => x*x*x, text: 'x^3'},
   { f: x => randomInt(x),  text: 'random(0, x]' },
