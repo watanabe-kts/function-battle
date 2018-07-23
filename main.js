@@ -18,6 +18,8 @@ let funcs = [
   { f: x => Math.abs(x), text: '|x|'},
   { f: x => x*x*x, text: 'x^3'},
   { f: x => randomInt(x),  text: 'random(0, x]' },
+  { f: x => -x,    text: '-x'},
+  { f: x => x %10, text: 'x mod 10'}
 ]
 
 let funcsOnlyG = [
